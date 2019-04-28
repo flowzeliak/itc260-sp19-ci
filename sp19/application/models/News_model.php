@@ -25,13 +25,21 @@ class News_model extends CI_Model {
             $this->load->helper('url');
 
             $slug = url_title($this->input->post('title'), 'dash', TRUE);
-
+     
             $data = array(
                 'title' => $this->input->post('title'),
                 'slug' => $slug,
                 'text' => $this->input->post('text')
             );
-
-            return $this->db->insert('sp19_news', $data);
+            
+            //return $this->db->insert('sp19_news', $data);
+            
+            if ($this->db->insert('sp19_news', $data)) 
+            {//return slug--send to view page
+                return $slug;   
+            } else {//return false
+                return false;
+            }
+            
         }
 }
